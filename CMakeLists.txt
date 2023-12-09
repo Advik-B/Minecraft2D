@@ -26,9 +26,12 @@ FetchContent_Declare(
 
 add_subdirectory(imgui-sfml)
 
+
 add_executable(Minecraft2D src/main.cpp)
+
 target_link_libraries(Minecraft2D PRIVATE sfml-graphics ImGui-SFML::ImGui-SFML)
 target_compile_features(Minecraft2D PRIVATE cxx_std_17)
+
 
 # If debug build, add debug definitions
 if(CMAKE_BUILD_TYPE STREQUAL "Debug")
