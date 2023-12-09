@@ -54,19 +54,19 @@ std::map<std::string, Texture> loadTextures() {
     for (const auto & entry : fs::directory_iterator(itemPath)) {
         std::string path = entry.path();
         std::string name = path.substr(path.find_last_of("/") + 1);
-        textures["item." + name] = Texture(path, TextureType::Opaque);
+        textures["item." + name] = Texture(path, TextureType::Transparent);
     }
 
     for (const auto & entry : fs::directory_iterator(miscPath)) {
         std::string path = entry.path();
         std::string name = path.substr(path.find_last_of("/") + 1);
-        textures["misc." + name] = Texture(path, TextureType::Opaque);
+        textures["misc." + name] = Texture(path, TextureType::Transparent);
     }
 
     for (const auto & entry : fs::directory_iterator(mobEffectPath)) {
         std::string path = entry.path();
         std::string name = path.substr(path.find_last_of("/") + 1);
-        textures["mob_effect." + name] = Texture(path, TextureType::Opaque);
+        textures["mob_effect." + name] = Texture(path, TextureType::Transparent);
     }
 
     for (const auto & entry : fs::directory_iterator(paintingPath)) {
@@ -78,7 +78,7 @@ std::map<std::string, Texture> loadTextures() {
     for (const auto & entry : fs::directory_iterator(titlescreenPath)) {
         std::string path = entry.path();
         std::string name = path.substr(path.find_last_of("/") + 1);
-        textures["titlescreen." + name] = Texture(path, TextureType::Opaque);
+        textures["titlescreen." + name] = Texture(path, TextureType::Transparent);
     }
 
     return textures;
@@ -98,3 +98,38 @@ class Texture
         TextureType getType();
         std::string getPath();
 };
+
+Texture::Texture(std::string path, TextureType type) {
+    this->path = path;
+    this->type = type;
+}
+
+bool Texture::load() {
+    if (this->loaded) {
+        return true;
+    }
+
+    if (!this->texture.loadFromFile(this->path)) {
+        return false;
+    }
+
+    this->loaded = true;
+    return true;
+}
+
+bool Texture::isLoaded() {
+    return this->loaded;
+}
+
+sf::Texture Texture::getTexture() {
+    return this->texture;
+}
+
+TextureType Texture::getType() {
+    return this->type;
+}
+
+std::string Texture::getPath() {
+    return this->path;
+}
+
