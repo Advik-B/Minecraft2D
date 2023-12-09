@@ -81,7 +81,11 @@ sf::Texture Texture::getTexture() {
     return this->texture;
 }
 
-std::map<std::string, Texture> loadTextures() {
+namespace TextureLoader
+{
+    // Type aliases
+    using TextureMap = std::map<std::string, Texture>;
+    TextureMap loadTextures() {
     std::string blockPath = TEXTURE_PATH "block/";
     std::string containerPath = TEXTURE_PATH "container/";
     std::string itemPath = TEXTURE_PATH "item/";
@@ -180,3 +184,7 @@ std::map<std::string, Texture> loadTextures() {
 
     return textures;
 }
+
+}
+
+
