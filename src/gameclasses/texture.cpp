@@ -36,6 +36,7 @@ class Texture
         void setCategory(TextureCategory category);
         void load();
         bool isLoaded();
+        sf::Texture getTexture();
 
     private:
         bool loaded = false;
@@ -74,6 +75,10 @@ void Texture::load() {
 
 bool Texture::isLoaded() {
     return this->loaded;
+}
+
+sf::Texture Texture::getTexture() {
+    return this->texture;
 }
 
 std::map<std::string, Texture> loadTextures() {
