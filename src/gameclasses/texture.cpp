@@ -27,6 +27,55 @@ enum class TextureCategory
     Filter,
 };
 
+class Texture
+{
+    public:
+        Texture();
+        void setPath(std::string path);
+        void setType(TextureType type);
+        void setCategory(TextureCategory category);
+        void load();
+        bool isLoaded();
+
+    private:
+        bool loaded = false;
+        sf::Texture texture;
+        TextureType type;
+        std::string path;
+        TextureCategory category;
+
+};
+
+Texture::Texture() {}
+
+void Texture::setPath(std::string path) {
+    this->path = path;
+}
+
+void Texture::setType(TextureType type) {
+    this->type = type;
+}
+
+void Texture::setCategory(TextureCategory category) {
+    this->category = category;
+}
+
+void Texture::load() {
+    if (this->loaded) {
+        return;
+    }
+
+    if (!this->texture.loadFromFile(this->path)) {
+        return;
+    }
+
+    this->loaded = true;
+}
+
+bool Texture::isLoaded() {
+    return this->loaded;
+}
+
 std::map<std::string, Texture> loadTextures() {
     std::string blockPath = TEXTURE_PATH "block/";
     std::string containerPath = TEXTURE_PATH "container/";
@@ -37,99 +86,92 @@ std::map<std::string, Texture> loadTextures() {
     std::string titlescreenPath = TEXTURE_PATH "titlescreen/";
 
     std::map<std::string, Texture> textures;
-    // textures["block.dirt"] = Texture(blockPath + "dirt.png", TextureType::Opaque);
+
+    // block.grass -> Texture("block/grass.png")
 
     for (const auto & entry : fs::directory_iterator(blockPath)) {
-        std::string path = entry.path();
-        std::string name = path.substr(path.find_last_of("/") + 1);
-        textures["block." + name] = Texture(path, TextureType::Opaque);
+        const fs::path &path = entry.path();
+        fs::path filename = path.filename();
+        std::string filenameStr = filename.string();
+        std::string name = filenameStr.substr(0, filenameStr.find("."));
+        Texture texture = Texture();
+        texture.setPath(path.string());
+        texture.setType(TextureType::Opaque);
+        texture.setCategory(TextureCategory::Block);
+        textures["block." + name] = texture;
     }
 
     for (const auto & entry : fs::directory_iterator(containerPath)) {
-        std::string path = entry.path();
-        std::string name = path.substr(path.find_last_of("/") + 1);
-        textures["container." + name] = Texture(path, TextureType::Opaque);
+        const fs::path &path = entry.path();
+        fs::path filename = path.filename();
+        std::string filenameStr = filename.string();
+        std::string name = filenameStr.substr(0, filenameStr.find("."));
+        Texture texture = Texture();
+        texture.setPath(path.string());
+        texture.setType(TextureType::Opaque);
+        texture.setCategory(TextureCategory::Block);
+        textures["container." + name] = texture;
     }
 
     for (const auto & entry : fs::directory_iterator(itemPath)) {
-        std::string path = entry.path();
-        std::string name = path.substr(path.find_last_of("/") + 1);
-        textures["item." + name] = Texture(path, TextureType::Transparent);
+        const fs::path &path = entry.path();
+        fs::path filename = path.filename();
+        std::string filenameStr = filename.string();
+        std::string name = filenameStr.substr(0, filenameStr.find("."));
+        Texture texture = Texture();
+        texture.setPath(path.string());
+        texture.setType(TextureType::Opaque);
+        texture.setCategory(TextureCategory::Item);
+        textures["item." + name] = texture;
     }
 
     for (const auto & entry : fs::directory_iterator(miscPath)) {
-        std::string path = entry.path();
-        std::string name = path.substr(path.find_last_of("/") + 1);
-        textures["misc." + name] = Texture(path, TextureType::Transparent);
+        const fs::path &path = entry.path();
+        fs::path filename = path.filename();
+        std::string filenameStr = filename.string();
+        std::string name = filenameStr.substr(0, filenameStr.find("."));
+        Texture texture = Texture();
+        texture.setPath(path.string());
+        texture.setType(TextureType::Opaque);
+        texture.setCategory(TextureCategory::Item);
+        textures["misc." + name] = texture;
     }
 
     for (const auto & entry : fs::directory_iterator(mobEffectPath)) {
-        std::string path = entry.path();
-        std::string name = path.substr(path.find_last_of("/") + 1);
-        textures["mob_effect." + name] = Texture(path, TextureType::Transparent);
+        const fs::path &path = entry.path();
+        fs::path filename = path.filename();
+        std::string filenameStr = filename.string();
+        std::string name = filenameStr.substr(0, filenameStr.find("."));
+        Texture texture = Texture();
+        texture.setPath(path.string());
+        texture.setType(TextureType::Opaque);
+        texture.setCategory(TextureCategory::Item);
+        textures["mob_effect." + name] = texture;
     }
 
     for (const auto & entry : fs::directory_iterator(paintingPath)) {
-        std::string path = entry.path();
-        std::string name = path.substr(path.find_last_of("/") + 1);
-        textures["painting." + name] = Texture(path, TextureType::Opaque);
+        const fs::path &path = entry.path();
+        fs::path filename = path.filename();
+        std::string filenameStr = filename.string();
+        std::string name = filenameStr.substr(0, filenameStr.find("."));
+        Texture texture = Texture();
+        texture.setPath(path.string());
+        texture.setType(TextureType::Opaque);
+        texture.setCategory(TextureCategory::Item);
+        textures["painting." + name] = texture;
     }
 
     for (const auto & entry : fs::directory_iterator(titlescreenPath)) {
-        std::string path = entry.path();
-        std::string name = path.substr(path.find_last_of("/") + 1);
-        textures["titlescreen." + name] = Texture(path, TextureType::Transparent);
+        const fs::path &path = entry.path();
+        fs::path filename = path.filename();
+        std::string filenameStr = filename.string();
+        std::string name = filenameStr.substr(0, filenameStr.find("."));
+        Texture texture = Texture();
+        texture.setPath(path.string());
+        texture.setType(TextureType::Opaque);
+        texture.setCategory(TextureCategory::Item);
+        textures["titlescreen." + name] = texture;
     }
 
     return textures;
 }
-
-class Texture
-{
-    public:
-        Texture(std::string path, TextureType type);
-        sf::Texture texture;
-        TextureType type;
-        std::string path;
-        bool loaded = false;
-        bool load();
-        bool isLoaded();
-        sf::Texture getTexture();
-        TextureType getType();
-        std::string getPath();
-};
-
-Texture::Texture(std::string path, TextureType type) {
-    this->path = path;
-    this->type = type;
-}
-
-bool Texture::load() {
-    if (this->loaded) {
-        return true;
-    }
-
-    if (!this->texture.loadFromFile(this->path)) {
-        return false;
-    }
-
-    this->loaded = true;
-    return true;
-}
-
-bool Texture::isLoaded() {
-    return this->loaded;
-}
-
-sf::Texture Texture::getTexture() {
-    return this->texture;
-}
-
-TextureType Texture::getType() {
-    return this->type;
-}
-
-std::string Texture::getPath() {
-    return this->path;
-}
-
