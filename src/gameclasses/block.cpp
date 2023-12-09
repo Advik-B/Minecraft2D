@@ -12,6 +12,6 @@ class Block {
     private:
         sf::Sprite sprite;
         Texture texture;
-        
+
 
 };
