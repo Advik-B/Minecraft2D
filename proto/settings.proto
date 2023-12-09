@@ -17,4 +17,5 @@ message WindowContextSettings {
 message GameScreen {
   required WindowDimensions window_dimensions = 1;
   required WindowType window_type = 2;
+  required WindowContextSettings window_context_settings = 3;
 }
