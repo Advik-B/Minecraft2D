@@ -3,7 +3,7 @@ project(Minecraft2D LANGUAGES CXX)
 
 set(CMAKE_CXX_COMPILER_LAUNCHER ccache)
 set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/bin)
-set(COPY_ASSETS "false" CACHE STRING "Copy the assets folder to the build/bin directory")
+set(COPY_ASSETS "true" CACHE STRING "Copy the assets folder to the build/bin directory")
 option(BUILD_SHARED_LIBS "Build shared libraries" OFF)
 
 include(FetchContent)
@@ -68,7 +68,7 @@ if (COPY_ASSETS STREQUAL "true")
     add_custom_command(
         TARGET Minecraft2D
         COMMENT "Copy assets folder"
-        POST_BUILD COMMAND ${CMAKE_COMMAND} -E copy_directory ${CMAKE_SOURCE_DIR}/assets $<TARGET_FILE_DIR:Minecraft2D>/assets
+        POST_BUILD COMMAND ${CMAKE_COMMAND} -E copy_directory ${CMAKE_SOURCE_DIR}/assets $<TARGET_FILE_DIR:Minecraft2D>/bin/assets
         VERBATIM
     )
 
