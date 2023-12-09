@@ -1,4 +1,5 @@
 #include <SFML/Graphics.hpp>
+#include "colour_utils.cpp"
 
 class Game {
     public:
@@ -6,8 +7,12 @@ class Game {
         int run();
         void onExit() {};
         void beforeStart() {};
+
     private:
         sf::RenderWindow window;
+        sf::Color backgroundColour;
+        sf::Event event;
+
         void processEvents();
         void update();
         void render();
@@ -18,11 +23,12 @@ class Game {
 Game::Game() {
     window.create(
         sf::VideoMode::getDesktopMode(),
-        "SFML works!",
+        "Minecraft 2D",
         sf::Style::Fullscreen,
         sf::ContextSettings(24, 8, 4)
     );
     window.setVerticalSyncEnabled(true);
+    backgroundColour = rgb(31, 32, 40);
 }
 
 int Game::run() {
@@ -37,7 +43,6 @@ int Game::run() {
 }
 
 void Game::processEvents() {
-    sf::Event event;
     while (window.pollEvent(event)) {
         if (event.type == sf::Event::Closed) {
             window.close();
@@ -59,7 +64,7 @@ void Game::update() {
 }
 
 void Game::render() {
-    window.clear();
+    window.clear(backgroundColour);
     window.display();
 }
 
