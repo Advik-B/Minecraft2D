@@ -12,11 +12,14 @@ struct BlockAttributes {
 };
 
 
+
 class Block {
     public:
         Block();
         void setTexture(std::string texture, std::map<std::string, Texture> textureMap);
         void drawTo(sf::RenderWindow target);
+        void drawTo(sf::RenderTarget *target);
+        void drawTo(sf::RenderTarget &target);
         void setAttributes(BlockAttributes attributes);
         void setPos(sf::Vector2f pos);
         void move(sf::Vector2f offset);
@@ -31,7 +34,7 @@ Block::Block() {
     this->sprite = sf::Sprite();
 }
 
-void Block::setTexture(std::string texture, std::map<std::string, Texture> textureMap) {
+void Block::setTexture(std::string texture, TextureLoader::TextureMap textureMap) {
     this->texture = textureMap[texture];
     this->sprite.setTexture(this->texture.getTexture());
 }
@@ -39,6 +42,15 @@ void Block::setTexture(std::string texture, std::map<std::string, Texture> textu
 void Block::drawTo(sf::RenderWindow target) {
     target.draw(this->sprite);
 }
+
+void Block::drawTo(sf::RenderTarget *target) {
+    target->draw(this->sprite);
+}
+
+void Block::drawTo(sf::RenderTarget &target) {
+    target.draw(this->sprite);
+}
+
 
 void Block::setAttributes(BlockAttributes attributes) {
     this->attributes = attributes;
