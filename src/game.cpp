@@ -5,13 +5,17 @@ class Game {
     public:
         Game();
         int run();
-        void onExit() {};
-        void beforeStart() {};
+        void onExit();
+        void beforeStart();
+        void setTickRate(int tickRate);
+        void tick();
 
     private:
         sf::RenderWindow window;
         sf::Color backgroundColour;
         sf::Event event;
+        int tickRate = 60;
+        int tickCount = 0;
 
         void processEvents();
         void update();
@@ -33,10 +37,12 @@ Game::Game() {
 
 int Game::run() {
     beforeStart();
+    this->tickCount = 0;
     while (window.isOpen()) {
         processEvents();
         update();
         render();
+
     }
     onExit();
     return 0;
@@ -60,7 +66,11 @@ void Game::processEvents() {
 }
 
 void Game::update() {
-
+    tickCount++;
+    if (tickCount >= tickRate) {
+        tick();
+        tickCount = 0;
+    }
 }
 
 void Game::render() {
@@ -76,4 +86,6 @@ void Game::keyPress(sf::Event::KeyEvent event) {
 
 void Game::keyRelease(sf::Event::KeyEvent event) {}
 
-
+void Game::setTickRate(int tickRate) {
+    this->tickRate = tickRate;
+}
