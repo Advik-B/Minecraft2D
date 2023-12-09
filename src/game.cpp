@@ -1,5 +1,6 @@
 #include <SFML/Graphics.hpp>
 #include "colour_utils.cpp"
+#include "gameclasses/block.cpp"
 
 class Game {
     public:
