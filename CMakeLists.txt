@@ -6,6 +6,8 @@ set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/bin)
 set(COPY_ASSETS "true" CACHE STRING "Copy the assets folder to the build/bin directory")
 option(BUILD_SHARED_LIBS "Build shared libraries" OFF)
 
+find_package(Freetype REQUIRED)
+
 include(FetchContent)
 FetchContent_Declare(SFML
     GIT_REPOSITORY https://github.com/SFML/SFML.git
@@ -27,10 +29,11 @@ FetchContent_Declare(
 
 add_subdirectory(imgui-sfml)
 
+include_directories(${FREETYPE_INCLUDE_DIRS})
 
 add_executable(Minecraft2D src/main.cpp)
 
-target_link_libraries(Minecraft2D PRIVATE sfml-graphics ImGui-SFML::ImGui-SFML)
+target_link_libraries(Minecraft2D PRIVATE sfml-graphics ImGui-SFML::ImGui-SFML ${FREETYPE_LIBRARIES})
 target_compile_features(Minecraft2D PRIVATE cxx_std_17)
 
 
@@ -64,11 +67,19 @@ endif()
 
 if (COPY_ASSETS STREQUAL "true")
 
+    # Delete the assets folder in the build/bin directory (if it exists)
+    add_custom_command(
+        TARGET Minecraft2D
+        COMMENT "Delete assets folder"
+        PRE_BUILD COMMAND ${CMAKE_COMMAND} -E remove_directory $<TARGET_FILE_DIR:Minecraft2D>/assets
+        VERBATIM
+    )
+
     # Copy the assets folder to the build/bin directory
     add_custom_command(
         TARGET Minecraft2D
         COMMENT "Copy assets folder"
-        POST_BUILD COMMAND ${CMAKE_COMMAND} -E copy_directory ${CMAKE_SOURCE_DIR}/assets $<TARGET_FILE_DIR:Minecraft2D>/bin/assets
+        POST_BUILD COMMAND ${CMAKE_COMMAND} -E copy_directory ${CMAKE_SOURCE_DIR}/assets $<TARGET_FILE_DIR:Minecraft2D>/assets
         VERBATIM
     )
 
