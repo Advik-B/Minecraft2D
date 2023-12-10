@@ -43,8 +43,13 @@ void setStyle(ImGuiStyle &style) {
     style.Colors[ImGuiCol_WindowBg] = ImVec4(0.1f, 0.1f, 0.1f, 1.f);
 }
 
+
 int main() {
-    sf::RenderWindow window(sf::VideoMode(800, 600), "ImGui + SFML = <3");
+    sf::RenderWindow window(
+        sf::VideoMode::getDesktopMode(),
+        "ImGui + SFML = <3",
+        sf::Style::Fullscreen
+    );
     window.setFramerateLimit(60);
     ImGui::SFML::Init(window, false);
     ImGuiIO &io = ImGui::GetIO();
@@ -53,9 +58,6 @@ int main() {
     loadFonts(io);
     // Disable loading and saving of settings
     io.IniFilename = nullptr;
-
-    sf::CircleShape shape(100.f);
-    shape.setFillColor(sf::Color::Green);
 
     // Set up ImGui style
     setStyle(style);
@@ -84,7 +86,6 @@ int main() {
         ImGui::Text("Hello, world! \U0001F600");
         ImGui::End();
 
-        window.draw(shape);
         ImGui::SFML::Render(window);
         window.display();
     }
