@@ -24,12 +24,13 @@ namespace minecraft {
             virtual ~BaseItem() = default;
             BaseItem(const string &itemID);
 
+
             virtual ItemType getItemType() const = 0;
             virtual string getItemName() const = 0;
             virtual string getItemDescription() const = 0;
             virtual const sf::Sprite &getItemSprite() const = 0;
             virtual const sf::Sprite &getCursorSprite() const = 0;
-            virtual const string getItemID() const = 0;
+            virtual const string &getItemID() const = 0;
             virtual void onEquip(ItemContext &context) = 0;
             virtual void onUnequip(ItemContext &context) = 0;
             virtual void primaryUse(ItemContext &context) = 0;
