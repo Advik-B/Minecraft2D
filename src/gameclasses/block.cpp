@@ -23,6 +23,7 @@ class Block {
         void setAttributes(BlockAttributes attributes);
         void setPos(sf::Vector2f pos);
         void move(sf::Vector2f offset);
+        sf::Sprite Block::getSprite();
         Texture texture;
 
     private:
@@ -39,18 +40,9 @@ void Block::setTexture(std::string texture, TextureLoader::TextureMap textureMap
     this->sprite.setTexture(this->texture.getTexture());
 }
 
-void Block::drawTo(sf::RenderWindow target) {
-    target.draw(this->sprite);
+sf::Sprite Block::getSprite() {
+    return this->sprite;
 }
-
-void Block::drawTo(sf::RenderTarget *target) {
-    target->draw(this->sprite);
-}
-
-void Block::drawTo(sf::RenderTarget &target) {
-    target.draw(this->sprite);
-}
-
 
 void Block::setAttributes(BlockAttributes attributes) {
     this->attributes = attributes;
