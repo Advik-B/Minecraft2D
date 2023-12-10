@@ -1,8 +1,10 @@
 #include <SFML/Graphics.hpp>
 #include <imgui-SFML.h>
 #include <imgui.h>
+
 #include <filesystem>
 #include <iostream>
+
 
 #define ASSETS_PATH "assets/"
 #define FONT_PATH ASSETS_PATH "font/"
@@ -62,8 +64,20 @@ int main() {
     // Set up ImGui style
     setStyle(style);
 
+    sf::Texture texture;
+    if (!texture.loadFromFile("assets/textures/misc/spyglass_scope.png")) {
+        std::cerr << "Failed to load texture" << std::endl;
+        return 1;
+    }
+    sf::Sprite sprite(texture);
+    // Scale up the sprite
+    sprite.setScale(2.f, 2.f);
+    // Center the sprite
+    sprite.setOrigin(sprite.getLocalBounds().width / 2.f, sprite.getLocalBounds().height / 2.f);
+
     sf::Event event;
     sf::Clock deltaClock;
+    sf::Vector2i mousePos;
     while (window.isOpen()) {
 
         while (window.pollEvent(event)) {
@@ -71,9 +85,14 @@ int main() {
 
             if (event.type == sf::Event::Closed)
                 window.close();
+
         }
 
+
         ImGui::SFML::Update(window, deltaClock.restart());
+        mousePos = sf::Mouse::getPosition(window);
+        sprite.setPosition(mousePos.x, mousePos.y);
+
 
         window.clear();
 
@@ -87,6 +106,8 @@ int main() {
         ImGui::End();
 
         ImGui::SFML::Render(window);
+//        window.draw(sprite);
+
         window.display();
     }
 
