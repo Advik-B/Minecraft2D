@@ -90,7 +90,7 @@ int main() {
                 if (event.key.code == sf::Keyboard::Escape)
                     window.close();
             }
-            
+
         }
 
 
