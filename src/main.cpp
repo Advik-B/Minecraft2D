@@ -38,19 +38,27 @@ void loadFonts(ImGuiIO &io) {
     ImGui::SFML::UpdateFontTexture();
 }
 
+void setStyle(ImGuiStyle &style) {
+    style.WindowRounding = 8.f;
+    style.Colors[ImGuiCol_WindowBg] = ImVec4(0.1f, 0.1f, 0.1f, 1.f);
+}
+
 int main() {
     sf::RenderWindow window(sf::VideoMode(800, 600), "ImGui + SFML = <3");
     window.setFramerateLimit(60);
     ImGui::SFML::Init(window, false);
-    // Set font before using
     ImGuiIO &io = ImGui::GetIO();
-    // Load font(s)
+    ImGuiStyle &style = ImGui::GetStyle();
+
     loadFonts(io);
     // Disable loading and saving of settings
     io.IniFilename = nullptr;
 
     sf::CircleShape shape(100.f);
     shape.setFillColor(sf::Color::Green);
+
+    // Set up ImGui style
+    setStyle(style);
 
     sf::Event event;
     sf::Clock deltaClock;
