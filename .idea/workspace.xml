@@ -27,10 +27,7 @@
     </configurations>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="f4cf547a-6e6e-49a9-9458-834335bae5f0" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/textureLoader.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/textureLoader.cpp" afterDir="false" />
-    </list>
+    <list default="true" id="f4cf547a-6e6e-49a9-9458-834335bae5f0" name="Changes" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -166,7 +163,7 @@
       <updated>1706354230838</updated>
       <workItem from="1706354232936" duration="14325000" />
       <workItem from="1706427606365" duration="2232000" />
-      <workItem from="1706441987186" duration="8481000" />
+      <workItem from="1706441987186" duration="8766000" />
     </task>
     <servers />
   </component>
