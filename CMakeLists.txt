@@ -66,5 +66,13 @@ if(WIN32)
 
 endif()
 
+# Copy the assets folder to the build directory
+add_custom_command(
+    TARGET Minecraft2D
+    COMMENT "Copy assets folder"
+    PRE_BUILD COMMAND ${CMAKE_COMMAND} -E copy_directory ${CMAKE_SOURCE_DIR}/assets $<TARGET_FILE_DIR:Minecraft2D>/assets
+    VERBATIM
+)
+
 install(TARGETS Minecraft2D)
 
