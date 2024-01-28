@@ -47,6 +47,9 @@
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
+  <component name="HighlightingSettingsPerFile">
+    <setting file="file://D:/Programs/Visual Studio/VC/Tools/MSVC/14.38.33130/include/vadefs.h" root0="FORCE_HIGHLIGHTING" />
+  </component>
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
   </component>
@@ -80,7 +83,7 @@
     "RunOnceActivity.readMode.enableVisualFormatting": "true",
     "cf.first.check.clang-format": "false",
     "cidr.known.project.marker": "true",
-    "git-widget-placeholder": "develop",
+    "git-widget-placeholder": "1-basic-rendering",
     "last_opened_file_path": "P:/Github/Minecraft2D/assets/textures/tilemap",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
@@ -164,6 +167,7 @@
       <workItem from="1706354232936" duration="14325000" />
       <workItem from="1706427606365" duration="2232000" />
       <workItem from="1706441987186" duration="8766000" />
+      <workItem from="1706460995957" duration="1910000" />
     </task>
     <servers />
   </component>
