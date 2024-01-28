@@ -23,6 +23,7 @@ public:
     textureID getTextureID(const String& textureName) const;
     const Texture* getTilemap() const;
     const Texture* getTile(int x, int y) const;
+    std::map <String, textureID> getTextureAliases() const { return textureAliases; }
 
 private:
     std::map<String, textureID> textureAliases;
@@ -32,7 +33,8 @@ private:
 };
 
 TextureLoader::TextureLoader() {
-    tilemap = std::make_unique<Texture>(loadTexture(tileMapFile));
+    tilemap = std::make_unique<Texture>();
+    tilemap->loadFromFile(tileMapFile);
     makeStringAliases();
 }
 
@@ -58,12 +60,8 @@ const Texture* TextureLoader::getTile(int x, int y) const {
     return tile.release();
 }
 
-Texture* TextureLoader::loadTexture(const std::string& path) {
-    auto texture = std::make_unique<Texture>();
-    texture->loadFromFile(path);
-    return texture.release();
-}
 
 void TextureLoader::makeStringAliases() {
     textureAliases["grass"] = {0, 0};
 }
+
