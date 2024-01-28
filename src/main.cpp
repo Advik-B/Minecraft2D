@@ -5,6 +5,8 @@
 #define keyPress(key) sf::Keyboard::isKeyPressed(sf::Keyboard::key)
 #define keyPressDelay 0.1f // Seconds
 
+#include <iostream>
+
 sf::Vector2i getWindowCenterPos(sf::Vector2u screenSize, sf::Vector2u windowSize) {
     // Returns the center position of the window on the screen
     // Keep in mind that the window size is not the same as the screen size
@@ -53,9 +55,14 @@ int main() {
     TextureLoader loader;
     sf::Sprite sprite;
 
-    sprite.setTexture(*loader.getTexture("grass"));
+    sprite.setTexture(*loader.getTile(10, 10));
     sprite.setPosition(0, 0);
     sprite.setScale(2, 2);
+
+    // Print all the texture aliases
+    for (auto &alias : loader.getTextureAliases()) {
+        std::cout << alias.first.toAnsiString() << ": " << alias.second.x << ", " << alias.second.y << std::endl;
+    }
 
     while (window.isOpen()) {
         while (window.pollEvent(event)) {
